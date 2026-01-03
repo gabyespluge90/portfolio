@@ -74,13 +74,13 @@ export const AdminSettings = () => {
   }
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6">
-      <h2 className="text-lg font-semibold mb-6">Información Personal</h2>
+    <div className="bg-card border border-border rounded-lg p-4 sm:p-6">
+      <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Información Personal</h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Nombre</Label>
+            <Label htmlFor="name" className="text-sm">Nombre</Label>
             <Input
               id="name"
               value={formData.name}
@@ -89,7 +89,7 @@ export const AdminSettings = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="title">Título profesional</Label>
+            <Label htmlFor="title" className="text-sm">Título profesional</Label>
             <Input
               id="title"
               value={formData.title}
@@ -99,7 +99,7 @@ export const AdminSettings = () => {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="tagline">Tagline</Label>
+          <Label htmlFor="tagline" className="text-sm">Tagline</Label>
           <Input
             id="tagline"
             value={formData.tagline}
@@ -108,14 +108,14 @@ export const AdminSettings = () => {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="profile_image">Foto de perfil</Label>
-          <div className="flex items-center gap-4">
+          <Label htmlFor="profile_image" className="text-sm">Foto de perfil</Label>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             {formData.profile_image_url && (
-              <div className="relative">
+              <div className="relative shrink-0">
                 <img 
                   src={formData.profile_image_url} 
                   alt="Preview" 
-                  className="w-16 h-16 rounded-full object-cover border border-border"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover border border-border"
                 />
                 <button
                   type="button"
@@ -126,7 +126,7 @@ export const AdminSettings = () => {
                 </button>
               </div>
             )}
-            <div className="flex-1 flex gap-2">
+            <div className="w-full flex gap-2">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -167,12 +167,13 @@ export const AdminSettings = () => {
               <Button
                 type="button"
                 variant="outline"
+                size="sm"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploading}
-                className="gap-2"
+                className="gap-2 text-xs sm:text-sm"
               >
                 <Upload className="h-4 w-4" />
-                {uploading ? 'Subiendo...' : 'Seleccionar imagen'}
+                {uploading ? 'Subiendo...' : 'Seleccionar'}
               </Button>
             </div>
           </div>
@@ -181,65 +182,70 @@ export const AdminSettings = () => {
             value={formData.profile_image_url}
             onChange={(e) => setFormData({ ...formData, profile_image_url: e.target.value })}
             placeholder="O pega una URL directamente..."
-            className="mt-2"
+            className="mt-2 text-sm"
           />
         </div>
         
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="linkedin_url">LinkedIn URL</Label>
+            <Label htmlFor="linkedin_url" className="text-sm">LinkedIn URL</Label>
             <Input
               id="linkedin_url"
               value={formData.linkedin_url}
               onChange={(e) => setFormData({ ...formData, linkedin_url: e.target.value })}
               placeholder="https://linkedin.com/in/..."
+              className="text-sm"
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="github_url">GitHub URL</Label>
+            <Label htmlFor="github_url" className="text-sm">GitHub URL</Label>
             <Input
               id="github_url"
               value={formData.github_url}
               onChange={(e) => setFormData({ ...formData, github_url: e.target.value })}
               placeholder="https://github.com/..."
+              className="text-sm"
             />
           </div>
           
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+          <div className="space-y-2 sm:col-span-2 lg:col-span-1">
+            <Label htmlFor="email" className="text-sm">Email</Label>
             <Input
               id="email"
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="text-sm"
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="about_text">Texto de About</Label>
+          <Label htmlFor="about_text" className="text-sm">Texto de About</Label>
           <Textarea
             id="about_text"
             value={formData.about_text}
             onChange={(e) => setFormData({ ...formData, about_text: e.target.value })}
             placeholder="Describe tu experiencia y especialidades..."
             rows={4}
+            className="text-sm"
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="contact_text">Texto de Contacto</Label>
+          <Label htmlFor="contact_text" className="text-sm">Texto de Contacto</Label>
           <Textarea
             id="contact_text"
             value={formData.contact_text}
             onChange={(e) => setFormData({ ...formData, contact_text: e.target.value })}
             placeholder="Mensaje para la sección de contacto..."
             rows={2}
+            className="text-sm"
           />
         </div>
         
-        <Button type="submit" disabled={saving} className="gap-2">
+        <Button type="submit" disabled={saving} className="gap-2 w-full sm:w-auto">
           <Save className="h-4 w-4" />
           {saving ? 'Guardando...' : 'Guardar cambios'}
         </Button>

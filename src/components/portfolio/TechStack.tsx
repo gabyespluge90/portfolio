@@ -1,4 +1,5 @@
 import { Database, BarChart3, Table, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const technologies = [
   { name: "SQL", icon: Database },
@@ -8,10 +9,12 @@ const technologies = [
 ];
 
 export const TechStack = () => {
+  const { t } = useLanguage();
+  
   return (
     <section id="tech-stack" className="py-24 px-6 bg-muted/30">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">Tech Stack</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">{t('tech.title')}</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {technologies.map((tech) => (
             <div

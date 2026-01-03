@@ -43,36 +43,36 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-bold">Panel de Administración</h1>
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="gap-2">
+      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-2">
+          <h1 className="text-lg sm:text-xl font-bold truncate">Panel Admin</h1>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="gap-1 sm:gap-2 px-2 sm:px-3">
               <Home className="h-4 w-4" />
-              Ver sitio
+              <span className="hidden sm:inline">Ver sitio</span>
             </Button>
-            <Button variant="outline" size="sm" onClick={handleSignOut} className="gap-2">
+            <Button variant="outline" size="sm" onClick={handleSignOut} className="gap-1 sm:gap-2 px-2 sm:px-3">
               <LogOut className="h-4 w-4" />
-              Cerrar sesión
+              <span className="hidden sm:inline">Cerrar sesión</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <Tabs defaultValue="settings" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="settings" className="gap-2">
+          <TabsList className="w-full flex mb-6 sm:mb-8 h-auto p-1">
+            <TabsTrigger value="settings" className="flex-1 gap-1 sm:gap-2 py-2 sm:py-2.5 text-xs sm:text-sm">
               <Settings className="h-4 w-4" />
-              Info Personal
+              <span className="hidden xs:inline sm:inline">Info</span>
             </TabsTrigger>
-            <TabsTrigger value="projects" className="gap-2">
+            <TabsTrigger value="projects" className="flex-1 gap-1 sm:gap-2 py-2 sm:py-2.5 text-xs sm:text-sm">
               <FolderKanban className="h-4 w-4" />
-              Proyectos
+              <span className="hidden xs:inline sm:inline">Proyectos</span>
             </TabsTrigger>
-            <TabsTrigger value="case-studies" className="gap-2">
+            <TabsTrigger value="case-studies" className="flex-1 gap-1 sm:gap-2 py-2 sm:py-2.5 text-xs sm:text-sm">
               <FileText className="h-4 w-4" />
-              Casos de Estudio
+              <span className="hidden xs:inline sm:inline">Casos</span>
             </TabsTrigger>
           </TabsList>
           

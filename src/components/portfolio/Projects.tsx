@@ -3,10 +3,12 @@ import { ExternalLink, Github, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useProjects } from "@/hooks/useProjects";
 import { useCaseStudies } from "@/hooks/useCaseStudies";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export const Projects = () => {
   const { projects, loading } = useProjects();
   const { caseStudies } = useCaseStudies();
+  const { t } = useLanguage();
   
   const hasCaseStudy = (projectId: string) => {
     return caseStudies.some(cs => cs.project_id === projectId);
@@ -16,7 +18,7 @@ export const Projects = () => {
     return (
       <section id="portfolio" className="py-24 px-6">
         <div className="max-w-5xl mx-auto text-center">
-          <p className="text-muted-foreground">Cargando proyectos...</p>
+          <p className="text-muted-foreground">{t('projects.loading')}</p>
         </div>
       </section>
     );
@@ -27,7 +29,7 @@ export const Projects = () => {
   return (
     <section id="portfolio" className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">Portfolio</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">{t('projects.title')}</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {visibleProjects.map((project) => (
             <article
@@ -55,13 +57,13 @@ export const Projects = () => {
                   <Button variant="default" size="sm" className="w-full gap-2" asChild>
                     <Link to={`/case-study/${project.id}`}>
                       <FileText className="h-4 w-4" />
-                      Ver Case Study
+                      {t('projects.caseStudy')}
                     </Link>
                   </Button>
                 ) : (
                   <Button variant="default" size="sm" className="w-full gap-2" disabled>
                     <FileText className="h-4 w-4" />
-                    Ver Case Study
+                    {t('projects.caseStudy')}
                   </Button>
                 )}
               </div>
@@ -72,7 +74,7 @@ export const Projects = () => {
                   <Button variant="outline" size="sm" className="flex-1 gap-2" asChild>
                     <a href={project.dashboard_url} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4" />
-                      Dashboard
+                      {t('projects.dashboard')}
                     </a>
                   </Button>
                 )}
@@ -80,7 +82,7 @@ export const Projects = () => {
                   <Button variant="outline" size="sm" className="flex-1 gap-2" asChild>
                     <a href={project.github_url} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" />
-                      GitHub
+                      {t('projects.github')}
                     </a>
                   </Button>
                 )}
@@ -89,11 +91,11 @@ export const Projects = () => {
                   <>
                     <Button variant="outline" size="sm" className="flex-1 gap-2" disabled>
                       <ExternalLink className="h-4 w-4" />
-                      Dashboard
+                      {t('projects.dashboard')}
                     </Button>
                     <Button variant="outline" size="sm" className="flex-1 gap-2" disabled>
                       <Github className="h-4 w-4" />
-                      GitHub
+                      {t('projects.github')}
                     </Button>
                   </>
                 )}
@@ -104,7 +106,7 @@ export const Projects = () => {
         
         {visibleProjects.length === 0 && (
           <p className="text-center text-muted-foreground">
-            No hay proyectos para mostrar.
+            {t('projects.empty')}
           </p>
         )}
       </div>

@@ -5,15 +5,17 @@ import { Projects } from "@/components/portfolio/Projects";
 import { Contact } from "@/components/portfolio/Contact";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import BackgroundPattern from "@/components/BackgroundPattern";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const Index = () => {
   const { settings, loading } = useSiteSettings();
+  const { t } = useLanguage();
 
   if (loading) {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <BackgroundPattern />
-        <p className="text-muted-foreground">Cargando...</p>
+        <p className="text-muted-foreground">{t('loading')}</p>
       </main>
     );
   }

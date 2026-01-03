@@ -220,35 +220,36 @@ export const AdminCaseStudies = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Casos de Estudio ({caseStudies.length})</h2>
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="text-base sm:text-lg font-semibold">Casos de Estudio ({caseStudies.length})</h2>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button onClick={openNewDialog} className="gap-2" disabled={availableProjects.length === 0}>
+            <Button onClick={openNewDialog} size="sm" className="gap-1 sm:gap-2 text-xs sm:text-sm" disabled={availableProjects.length === 0}>
               <Plus className="h-4 w-4" />
-              Nuevo caso de estudio
+              <span className="hidden sm:inline">Nuevo caso</span>
+              <span className="sm:hidden">Nuevo</span>
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
             <DialogHeader>
-              <DialogTitle>
+              <DialogTitle className="text-base sm:text-lg">
                 {editingCaseStudy ? 'Editar caso de estudio' : 'Nuevo caso de estudio'}
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="project_id">Proyecto</Label>
+                <Label htmlFor="project_id" className="text-sm">Proyecto</Label>
                 <Select
                   value={formData.project_id}
                   onValueChange={(value) => setFormData({ ...formData, project_id: value })}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="text-sm">
                     <SelectValue placeholder="Selecciona un proyecto" />
                   </SelectTrigger>
                   <SelectContent>
                     {availableProjects.map((project) => (
-                      <SelectItem key={project.id} value={project.id}>
+                      <SelectItem key={project.id} value={project.id} className="text-sm">
                         {project.title}
                       </SelectItem>
                     ))}
@@ -257,88 +258,94 @@ export const AdminCaseStudies = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="overview">Resumen del Proyecto</Label>
+                <Label htmlFor="overview" className="text-sm">Resumen del Proyecto</Label>
                 <Textarea
                   id="overview"
                   value={formData.overview}
                   onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
                   placeholder="Descripción del problema de negocio y contexto..."
-                  rows={4}
+                  rows={3}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="data_sources">Fuentes de Datos</Label>
+                <Label htmlFor="data_sources" className="text-sm">Fuentes de Datos</Label>
                 <Textarea
                   id="data_sources"
                   value={formData.data_sources}
                   onChange={(e) => setFormData({ ...formData, data_sources: e.target.value })}
                   placeholder="Descripción de las fuentes de datos utilizadas..."
-                  rows={3}
+                  rows={2}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="tools_used">Herramientas Utilizadas (una por línea)</Label>
+                <Label htmlFor="tools_used" className="text-sm">Herramientas (una por línea)</Label>
                 <Textarea
                   id="tools_used"
                   value={formData.tools_used}
                   onChange={(e) => setFormData({ ...formData, tools_used: e.target.value })}
                   placeholder="SQL&#10;Google Sheets&#10;Looker Studio"
-                  rows={3}
+                  rows={2}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="analytical_approach">Enfoque Analítico</Label>
+                <Label htmlFor="analytical_approach" className="text-sm">Enfoque Analítico</Label>
                 <Textarea
                   id="analytical_approach"
                   value={formData.analytical_approach}
                   onChange={(e) => setFormData({ ...formData, analytical_approach: e.target.value })}
                   placeholder="Descripción del enfoque y metodología utilizada..."
-                  rows={4}
+                  rows={3}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="key_insights">Hallazgos Clave (uno por línea)</Label>
+                <Label htmlFor="key_insights" className="text-sm">Hallazgos Clave (uno por línea)</Label>
                 <Textarea
                   id="key_insights"
                   value={formData.key_insights}
                   onChange={(e) => setFormData({ ...formData, key_insights: e.target.value })}
-                  placeholder="El 20% de los clientes genera el 80% de los ingresos&#10;Los picos de actividad se concentran en días específicos"
-                  rows={4}
+                  placeholder="El 20% de los clientes genera el 80% de los ingresos"
+                  rows={3}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="recommendations">Recomendaciones (una por línea)</Label>
+                <Label htmlFor="recommendations" className="text-sm">Recomendaciones (una por línea)</Label>
                 <Textarea
                   id="recommendations"
                   value={formData.recommendations}
                   onChange={(e) => setFormData({ ...formData, recommendations: e.target.value })}
-                  placeholder="Implementar programa de fidelización&#10;Optimizar recursos según demanda"
-                  rows={4}
+                  placeholder="Implementar programa de fidelización"
+                  rows={3}
+                  className="text-sm"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label>Imágenes del Caso de Estudio</Label>
+                <Label className="text-sm">Imágenes del Caso de Estudio</Label>
                 
                 {/* Image previews */}
                 {uploadedImages.length > 0 && (
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {uploadedImages.map((url, index) => (
                       <div key={index} className="relative group">
                         <img 
                           src={url} 
                           alt={`Imagen ${index + 1}`} 
-                          className="w-full h-24 object-cover rounded-md border border-border"
+                          className="w-full h-20 sm:h-24 object-cover rounded-md border border-border"
                         />
                         <button
                           type="button"
                           onClick={() => removeImage(index)}
-                          className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
                         >
                           <X className="h-3 w-3" />
                         </button>
@@ -348,7 +355,7 @@ export const AdminCaseStudies = () => {
                 )}
                 
                 {/* Upload button */}
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2 items-center">
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -360,28 +367,29 @@ export const AdminCaseStudies = () => {
                   <Button
                     type="button"
                     variant="outline"
+                    size="sm"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploading}
-                    className="gap-2"
+                    className="gap-2 text-xs sm:text-sm"
                   >
                     <Upload className="h-4 w-4" />
                     {uploading ? 'Subiendo...' : 'Subir imágenes'}
                   </Button>
                   {uploadedImages.length > 0 && (
-                    <span className="text-sm text-muted-foreground self-center">
-                      <Image className="h-4 w-4 inline mr-1" />
+                    <span className="text-xs text-muted-foreground">
+                      <Image className="h-3 w-3 inline mr-1" />
                       {uploadedImages.length} imagen(es)
                     </span>
                   )}
                 </div>
               </div>
               
-              <div className="flex justify-end gap-2 pt-4">
-                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+              <div className="flex flex-col-reverse sm:flex-row justify-end gap-2 pt-4">
+                <Button type="button" variant="outline" size="sm" onClick={() => setIsDialogOpen(false)} className="w-full sm:w-auto">
                   <X className="h-4 w-4 mr-2" />
                   Cancelar
                 </Button>
-                <Button type="submit" disabled={saving || !formData.project_id}>
+                <Button type="submit" size="sm" disabled={saving || !formData.project_id} className="w-full sm:w-auto">
                   <Save className="h-4 w-4 mr-2" />
                   {saving ? 'Guardando...' : 'Guardar'}
                 </Button>
@@ -391,33 +399,33 @@ export const AdminCaseStudies = () => {
         </Dialog>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {caseStudies.map((caseStudy) => (
           <div
             key={caseStudy.id}
-            className="bg-card border border-border rounded-lg p-4 flex items-start justify-between gap-4"
+            className="bg-card border border-border rounded-lg p-3 sm:p-4 flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4"
           >
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <FileText className="h-4 w-4 text-primary" />
-                <h3 className="font-medium">{getProjectTitle(caseStudy.project_id)}</h3>
+                <FileText className="h-4 w-4 text-primary shrink-0" />
+                <h3 className="font-medium text-sm sm:text-base truncate">{getProjectTitle(caseStudy.project_id)}</h3>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-2">
+              <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
                 {caseStudy.overview || 'Sin resumen'}
               </p>
-              <div className="flex gap-2 mt-2 text-xs text-muted-foreground">
+              <div className="flex flex-wrap gap-2 mt-2 text-xs text-muted-foreground">
                 <span>{caseStudy.key_insights.length} hallazgos</span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span>{caseStudy.recommendations.length} recomendaciones</span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span>{caseStudy.images.length} imágenes</span>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="icon" onClick={() => openEditDialog(caseStudy)}>
+            <div className="flex gap-2 self-end sm:self-start shrink-0">
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => openEditDialog(caseStudy)}>
                 <Pencil className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => handleDelete(caseStudy.id)}>
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleDelete(caseStudy.id)}>
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
@@ -425,7 +433,7 @@ export const AdminCaseStudies = () => {
         ))}
         
         {caseStudies.length === 0 && (
-          <p className="text-center text-muted-foreground py-8">
+          <p className="text-center text-muted-foreground py-6 sm:py-8 text-sm">
             No hay casos de estudio. Crea el primero para un proyecto existente.
           </p>
         )}
